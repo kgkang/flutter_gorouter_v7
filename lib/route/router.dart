@@ -3,6 +3,7 @@ import 'package:flutter_gorouter_v7/screens/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/2_named_screen.dart';
+import '../screens/3_push_screen.dart';
 
 // Path 개념처럼 route를 선언한다.
 // 예를 들어 base url이 https://blog.codefactory.ai 라면
@@ -30,7 +31,13 @@ final router = GoRouter(
             builder: (context, state) {
               return NamedScreen();
             }
-        )
+        ),
+        GoRoute(
+            path: 'push',
+            builder: (context, state) {
+              return PushScreen();
+            }
+        ),
       ],
     ),
   ],
