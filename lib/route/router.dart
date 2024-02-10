@@ -1,4 +1,6 @@
 import 'package:flutter_gorouter_v7/screens/1_basic_screen.dart';
+import 'package:flutter_gorouter_v7/screens/4_pop_base_screen.dart';
+import 'package:flutter_gorouter_v7/screens/5_pop_return_screen.dart';
 import 'package:flutter_gorouter_v7/screens/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,6 +39,21 @@ final router = GoRouter(
             builder: (context, state) {
               return PushScreen();
             }
+        ),
+        GoRoute(
+            path: 'pop',
+            builder: (context, state) {
+              return PopBaseScreen();
+            },
+          routes: [
+            // /pop/return
+            GoRoute(
+              path: 'return',
+              builder: (context, state) {
+                return PopReturnScreen();
+              }
+            )
+          ]
         ),
       ],
     ),
