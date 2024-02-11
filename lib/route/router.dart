@@ -5,12 +5,17 @@ import 'package:flutter_gorouter_v7/screens/6_path_param_screen.dart';
 import 'package:flutter_gorouter_v7/screens/7_query_parameter.dart';
 import 'package:flutter_gorouter_v7/screens/8_nested_child_screen.dart';
 import 'package:flutter_gorouter_v7/screens/8_nested_screen.dart';
+import 'package:flutter_gorouter_v7/screens/9_login_screen.dart';
+import 'package:flutter_gorouter_v7/screens/9_private_screen.dart';
 import 'package:flutter_gorouter_v7/screens/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/2_named_screen.dart';
 import '../screens/3_push_screen.dart';
 
+// 로그인이 됐는지 안됐는지..
+// true : login, false : logout
+bool authState = false;
 
 // Path 개념처럼 route를 선언한다.
 // 예를 들어 base url이 https://blog.codefactory.ai 라면
@@ -19,6 +24,14 @@ import '../screens/3_push_screen.dart';
 // / => home
 // /basic => basic screen
 final router = GoRouter(
+  redirect: (context, state) {
+    // return path string -> 해당 path의 route로 이동한다.
+    // return null -> 원래 이동하려던 라우드로 이동한다.
+    if (state.matchedLocation == '/login/private' && !authState) {
+      return '/login';
+    }
+    return null;
+  },
   routes: [
     GoRoute(
       path: '/',
@@ -106,7 +119,33 @@ final router = GoRouter(
               },
             ),
           ],
-        )
+        ),
+        GoRoute(
+          path: 'login',
+          builder: (_, state) => LoginScreen(),
+          routes: [
+            GoRoute(
+              path: 'private',
+              builder: (_, state) => PrivateScreen(),
+            )
+          ],
+        ),
+        GoRoute(
+          path: 'login2',
+          builder: (_, state) => LoginScreen(),
+          routes: [
+            GoRoute(
+              path: 'private',
+              builder: (_, state) => PrivateScreen(),
+              redirect: (context, stete) {
+                if(!authState) {
+                  return '/login2';
+                }
+                return null;
+              }
+            )
+          ],
+        ),
       ],
     ),
   ],
