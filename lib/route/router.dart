@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gorouter_v7/screens/10_transition_screen_1.dart';
+import 'package:flutter_gorouter_v7/screens/10_transition_screen_2.dart';
 import 'package:flutter_gorouter_v7/screens/1_basic_screen.dart';
 import 'package:flutter_gorouter_v7/screens/4_pop_base_screen.dart';
 import 'package:flutter_gorouter_v7/screens/5_pop_return_screen.dart';
@@ -135,15 +138,43 @@ final router = GoRouter(
           builder: (_, state) => LoginScreen(),
           routes: [
             GoRoute(
-              path: 'private',
-              builder: (_, state) => PrivateScreen(),
-              redirect: (context, stete) {
-                if(!authState) {
-                  return '/login2';
-                }
-                return null;
-              }
-            )
+                path: 'private',
+                builder: (_, state) => PrivateScreen(),
+                redirect: (context, stete) {
+                  if (!authState) {
+                    return '/login2';
+                  }
+                  return null;
+                })
+          ],
+        ),
+        GoRoute(
+          path: 'transition',
+          builder: (_, state) => TransitionScreen1(),
+          routes: [
+            GoRoute(
+              path: 'detail',
+              // builder: (_, state) => TransitionScreen2(),
+              pageBuilder: (_, state) => CustomTransitionPage(
+                child: TransitionScreen2(),
+                transitionDuration: Duration(seconds: 3),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                  // return ScaleTransition(
+                  //   scale: animation,
+                  //   child: child,
+                  // );
+                  // return RotationTransition(
+                  //   turns: animation,
+                  //   child: child,
+                  // );
+                },
+              ),
+            ),
           ],
         ),
       ],
