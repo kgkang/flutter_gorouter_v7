@@ -10,6 +10,7 @@ import 'package:flutter_gorouter_v7/screens/8_nested_child_screen.dart';
 import 'package:flutter_gorouter_v7/screens/8_nested_screen.dart';
 import 'package:flutter_gorouter_v7/screens/9_login_screen.dart';
 import 'package:flutter_gorouter_v7/screens/9_private_screen.dart';
+import 'package:flutter_gorouter_v7/screens/error_screen.dart';
 import 'package:flutter_gorouter_v7/screens/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +28,10 @@ bool authState = false;
 // / => home
 // /basic => basic screen
 final router = GoRouter(
+  initialLocation: '/',
+  errorBuilder: (context, state) {
+    return ErrorScreen(error: state.error.toString());
+  },
   redirect: (context, state) {
     // return path string -> 해당 path의 route로 이동한다.
     // return null -> 원래 이동하려던 라우드로 이동한다.

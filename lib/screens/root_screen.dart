@@ -71,6 +71,13 @@ class RootScreen extends StatelessWidget {
             },
             child: Text('Transitiion Screen'),
           ),
+          // 에러를 발생시키기 위해 존재하지 않는 페이지로 이동
+          ElevatedButton(
+            onPressed: () {
+              context.go('/error');
+            },
+            child: Text('Make Error'),
+          ),
         ],
       ),
     );
