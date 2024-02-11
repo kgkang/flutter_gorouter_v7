@@ -29,6 +29,7 @@ bool authState = false;
 // /basic => basic screen
 final router = GoRouter(
   initialLocation: '/',
+  debugLogDiagnostics: true,
   errorBuilder: (context, state) {
     return ErrorScreen(error: state.error.toString());
   },
