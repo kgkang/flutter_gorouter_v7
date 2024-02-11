@@ -2,6 +2,7 @@ import 'package:flutter_gorouter_v7/screens/1_basic_screen.dart';
 import 'package:flutter_gorouter_v7/screens/4_pop_base_screen.dart';
 import 'package:flutter_gorouter_v7/screens/5_pop_return_screen.dart';
 import 'package:flutter_gorouter_v7/screens/6_path_param_screen.dart';
+import 'package:flutter_gorouter_v7/screens/7_query_parameter.dart';
 import 'package:flutter_gorouter_v7/screens/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -67,6 +68,12 @@ final router = GoRouter(
               },
             )
           ],
+        ),
+        GoRoute(
+          path: 'query_param',
+          builder: (context, state) {
+            return QueryParamScreen();
+          },
         ),
       ],
     ),
